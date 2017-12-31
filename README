@@ -1,0 +1,15 @@
+Test task is made by Alla Kislaia.
+
+Summary time spent for thit task - approximately 10 hours. 
+
+In order to run the project perform the following steps:
+1. In 'agile_test_fe' folder:
+	1)run 'npm install' in console;
+	2)run 'npm star' in console - so the FE part will work.
+2. In 'introduction' folder:
+	1)run 'sbt run' in console - so the BE part will work.	
+
+I`ve never worked with React.JS, Play Framework before, but I`m open to everything new, and I liked these technologies. As for Scala - I`ve never worked with that too, but I`ve already spent some valuable time for this task, and I`ve decided to put aside this technology for now. If Scala`s presence
+will be the last point in your decision, please inform me about that - I will add Scala to the task as soon as I can :)
+
+422 code suits the business logic failure the most appropriate way, as the server understands the content type of the request entity (415 Unsupported Media Type status code is inappropriate), and the syntax of the request entity is correct (400 Bad Request status code is inappropriate) but was unable to process the contained instructions - there are some business rules that are violated.
