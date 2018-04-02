@@ -1,7 +1,0 @@
-#accounts
-GET         /account/:id        controllers.AccountsController.getAccount(id:Long)
-GET         /list               controllers.AccountsController.getAllAccounts
-
-#transactions
-GET         /transact           controllers.AccountsController.getAllTransactions
-POST        /transact           controllers.AccountsController.makeFinancialTransaction()
