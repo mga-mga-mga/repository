@@ -1,0 +1,3 @@
+To run demo you need to execute:
+
+java -cp jade.jar;wumpus-1.0-SNAPSHOT-jar-with-dependencies.jar jade.Boot -gui
