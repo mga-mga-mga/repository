@@ -1,12 +1,16 @@
 package com.nure.botdetection.utils;
 
 import org.apache.commons.io.FileUtils;
+
+import twitter4j.GeoLocation;
+import twitter4j.Place;
 import twitter4j.Status;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +40,11 @@ public class UtilsForFiles {
         return FileUtils.readLines(file);
     }
 
+    public static void writeTweetToFile(List<Status> tweets, String fileName) throws IOException {
+        File file = new File(fileName);
+        FileUtils.writeLines(file, tweets);
+    }
+
     public static void writeStatusesToCsvFile(String fileName, List<Status> statuses) {
         FileWriter fileWriter = null;
 
@@ -56,13 +65,13 @@ public class UtilsForFiles {
                         .append(String.valueOf(st.isRetweeted())).append(DELIMITER)
                         .append(String.valueOf(st.getFavoriteCount())).append(DELIMITER)
                         .append(st.getInReplyToScreenName()).append(DELIMITER)
-                        .append(st.getGeoLocation().toString()).append(DELIMITER)
-                        .append(st.getPlace().toString()).append(DELIMITER)
+                        .append(Optional.ofNullable(st.getGeoLocation()).map(GeoLocation::toString).orElse(EMPTY_STRING)).append(DELIMITER)
+                        .append(Optional.ofNullable(st.getPlace()).map(Place::toString).orElse(EMPTY_STRING)).append(DELIMITER)
                         .append(String.valueOf(st.getRetweetCount())).append(DELIMITER)
                         .append(String.valueOf(st.isPossiblySensitive())).append(DELIMITER)
                         .append(st.getLang()).append(DELIMITER)
                         .append(Arrays.toString(st.getContributors())).append(DELIMITER)
-                        .append(Optional.ofNullable(st.getRetweetedStatus().toString()).orElse(EMPTY_STRING)).append(DELIMITER)
+                        .append(Optional.ofNullable(st.getRetweetedStatus()).map(Status::toString).orElse(EMPTY_STRING)).append(DELIMITER)
                         .append(Arrays.toString(st.getUserMentionEntities())).append(DELIMITER)
                         .append(Arrays.toString(st.getURLEntities())).append(DELIMITER)
                         .append(Arrays.toString(st.getHashtagEntities())).append(DELIMITER)
@@ -80,7 +89,7 @@ public class UtilsForFiles {
                         .append(st.getUser().getURL()).append(DELIMITER)
                         .append(String.valueOf(st.getUser().isProtected())).append(DELIMITER)
                         .append(String.valueOf(st.getUser().getFollowersCount())).append(DELIMITER)
-                        .append(Optional.ofNullable(st.getUser().getStatus().toString()).orElse(EMPTY_STRING)).append(DELIMITER)
+                        .append(Optional.ofNullable(st.getUser().getStatus()).map(Status::toString).orElse(EMPTY_STRING)).append(DELIMITER)
                         .append(st.getUser().getProfileBackgroundColor()).append(DELIMITER)
                         .append(st.getUser().getProfileTextColor()).append(DELIMITER)
                         .append(st.getUser().getProfileLinkColor()).append(DELIMITER)
@@ -88,7 +97,7 @@ public class UtilsForFiles {
                         .append(st.getUser().getProfileSidebarBorderColor()).append(DELIMITER)
                         .append(st.getUser().getProfileBackgroundImageURL()).append(DELIMITER)
                         .append(String.valueOf(st.getUser().getFriendsCount())).append(DELIMITER)
-                        .append(st.getUser().getCreatedAt().toString()).append(DELIMITER)
+                        .append(Optional.ofNullable(st.getUser().getCreatedAt()).map(Date::toString).orElse(EMPTY_STRING)).append(DELIMITER)
                         .append(String.valueOf(st.getUser().getFavouritesCount())).append(DELIMITER)
                         .append(String.valueOf(st.getUser().getUtcOffset())).append(DELIMITER)
                         .append(st.getUser().getTimeZone()).append(DELIMITER)
